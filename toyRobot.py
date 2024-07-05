@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 
+# Information about 'the world' (not the robot) is contained here
 WORLD_DATA = {
         "DIRECTIONS":
         {
@@ -25,13 +26,13 @@ WORLD_DATA = {
                 "MOVE": [-1, 0]
             }
         },
-        "grid": [5, 5]
+        "GRID": [5, 5]
 }
 
 class ToyRobot:
     def __init__(self):
         self.active = False
-        self.position = (0, 0)
+        self.position = None
         self.direction = None
 
     def move(self) -> None:
@@ -39,7 +40,7 @@ class ToyRobot:
             move = WORLD_DATA["DIRECTIONS"][self.direction]["MOVE"]
             x = self.position[0] + move[0]
             y = self.position[1] + move[1]
-            if 0 <= x < WORLD_DATA["grid"][0] and 0 <= y < WORLD_DATA["grid"][1]:
+            if 0 <= x < WORLD_DATA["GRID"][0] and 0 <= y < WORLD_DATA["GRID"][1]:
                 self.position = (x, y)
 
     def left(self) -> None:
@@ -52,7 +53,7 @@ class ToyRobot:
 
     def place(self, x: int, y: int, direction: str) -> None:
         if not self.active:
-            if 0 <= x < WORLD_DATA["grid"][0] and 0 <= y < WORLD_DATA["grid"][1]:
+            if 0 <= x < WORLD_DATA["GRID"][0] and 0 <= y < WORLD_DATA["GRID"][1]:
                 if direction in WORLD_DATA["DIRECTIONS"]:
                     self.position = (x, y)
                     self.active = True
@@ -60,7 +61,7 @@ class ToyRobot:
                 else:
                     print("Invalid direction. Use one of NORTH, SOUTH, EAST, WEST.")
             else:
-                print("Invalid position. Position should be within {}x{} grid.".format(WORLD_DATA["grid"][0], WORLD_DATA["grid"][1]))
+                print("Invalid position. Position should be within {}x{} grid.".format(WORLD_DATA["GRID"][0], WORLD_DATA["GRID"][1]))
 
     def report(self) -> None:
         if self.active:
