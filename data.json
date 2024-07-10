@@ -1,0 +1,40 @@
+{
+    "DIRECTIONS": {
+        "NORTH": {
+            "LEFT": "WEST",
+            "RIGHT": "EAST",
+            "MOVE": [
+                0,
+                1
+            ]
+        },
+        "SOUTH": {
+            "LEFT": "EAST",
+            "RIGHT": "WEST",
+            "MOVE": [
+                0,
+                -1
+            ]
+        },
+        "EAST": {
+            "LEFT": "NORTH",
+            "RIGHT": "SOUTH",
+            "MOVE": [
+                1,
+                0
+            ]
+        },
+        "WEST": {
+            "LEFT": "SOUTH",
+            "RIGHT": "NORTH",
+            "MOVE": [
+                -1,
+                0
+            ]
+        }
+    },
+    "GRID": [
+        5,
+        5
+    ]
+}

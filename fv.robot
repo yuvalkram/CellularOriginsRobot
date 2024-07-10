@@ -4,11 +4,11 @@ Library    Process
 *** Test Cases ***
 Test invalid placements
     ${output}=    Place Robot in Disallowed Place 1
-    Should Match    ${output.stdout}    Invalid position. Position should be within 5x5 grid.
+    Should Be Empty    ${output.stdout}
     ${output}=    Place Robot in Disallowed Place 2
-    Should Match    ${output.stdout}    Invalid position. Position should be within 5x5 grid.
+    Should Be Empty    ${output.stdout}
     ${output}=    Place Robot in Disallowed Place 3
-    Should Match    ${output.stdout}    Invalid position. Position should be within 5x5 grid.
+    Should Be Empty    ${output.stdout}
 
 Test valid placement and movement (one and two reports)
     ${output}=    Send to Robot    PLACE 2,4,SOUTH MOVE REPORT EXIT
@@ -58,13 +58,13 @@ Test all valid commands are ignored before a PLACE command
 
 Test that invalid keywords are ignored (and do not cause errors)
     ${output}=    Send to Robot    PLACE 1,1,NORTH INVALID MOVE REPORT EXIT
-    Should Match    ${output.stdout}    Invalid command. Use one of REPORT, MOVE, LEFT, RIGHT, PLACE x,y,direction.\n1 2 NORTH
+    Should Match    ${output.stdout}    1 2 NORTH
     ${output}=    Send to Robot    PLACE 1,1,NORTH WESTSOUTH PLACE 2,2,SOUTH REPORT EXIT
-    Should Match    ${output.stdout}    Invalid command. Use one of REPORT, MOVE, LEFT, RIGHT, PLACE x,y,direction.\n1 1 NORTH
+    Should Match    ${output.stdout}    1 1 NORTH
     ${output}=    Send to Robot    PLACE NORTH,1,1 PLACE 2,2,SOUTH REPORT EXIT
-    Should Match    ${output.stdout}    invalid literal for int() with base 10: 'NORTH'\n2 2 SOUTH
-    ${output}=    Send to Robot    PLACE 2,1,1 EXIT
-    Should Match    ${output.stdout}    Invalid direction. Use one of NORTH, SOUTH, EAST, WEST.
+    Should Match    ${output.stdout}    2 2 SOUTH
+    ${output}=    Send to Robot    PLACE 2,1,1 REPORT EXIT
+    Should Be Empty    ${output.stdout}
 
 *** Keywords ***
 Send to Robot 
